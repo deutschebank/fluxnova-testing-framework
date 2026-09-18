@@ -4,21 +4,33 @@ import org.assertj.core.util.Lists;
 import org.finos.fluxnova.bpm.engine.RuntimeService;
 import org.finos.fluxnova.bpm.engine.runtime.ProcessInstance;
 import org.finos.fluxnova.bpm.test.mockito.FluxnovaMockito;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.MockitoAnnotations;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
-@RunWith(MockitoJUnitRunner.class)
 public class ProcessInstanceQueryMockTest {
+
+  private AutoCloseable mocks;
 
   @Mock
   private RuntimeService runtimeServiceMock;
+
+  @BeforeEach
+  void setUp() {
+    mocks = MockitoAnnotations.openMocks(this);
+  }
+
+  @AfterEach
+  void tearDown() throws Exception {
+    mocks.close();
+  }
 
   @Test
   public void should_not_throw_stubbing_exception_on_only_single_result() {

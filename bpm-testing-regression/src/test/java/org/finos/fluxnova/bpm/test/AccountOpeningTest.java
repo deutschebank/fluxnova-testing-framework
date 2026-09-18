@@ -1,14 +1,12 @@
 package org.finos.fluxnova.bpm.test;
 
 import org.finos.fluxnova.bpm.test.helpers.DelegateHelpers;
-import org.finos.fluxnova.bpm.test.process.ProcessTestExtension;
 import org.finos.fluxnova.bpm.engine.delegate.BpmnError;
 import org.finos.fluxnova.bpm.engine.runtime.ProcessInstance;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -28,19 +26,18 @@ import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.finos.fluxnova.bpm.engine.test.assertions.bpmn.BpmnAwareTests.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
 class AccountOpeningTest extends ProcessTestExtension {
 
     @Autowired
     DelegateMocks delegateMocks;
 
     @BeforeAll
-    static void beforeAll() {
+    void beforeAll() {
         setup("AccountOpening-InvestmentAccount.bpmn");
     }
 
     @AfterAll
-    static void after() {
+    void after() {
         teardown();
     }
 

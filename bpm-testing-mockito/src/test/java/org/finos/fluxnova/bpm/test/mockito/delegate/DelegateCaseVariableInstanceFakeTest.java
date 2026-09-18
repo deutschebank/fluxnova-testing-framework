@@ -6,7 +6,7 @@ import org.finos.fluxnova.bpm.engine.variable.impl.value.AbstractTypedValue;
 import org.finos.fluxnova.bpm.engine.variable.type.ValueType;
 import org.finos.fluxnova.bpm.engine.variable.value.TypedValue;
 import org.finos.fluxnova.bpm.test.mockito.FluxnovaMockito;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;

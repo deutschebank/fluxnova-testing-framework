@@ -4,7 +4,7 @@ import org.finos.fluxnova.bpm.engine.AuthorizationService;
 import org.finos.fluxnova.bpm.engine.authorization.Authorization;
 import org.finos.fluxnova.bpm.engine.authorization.AuthorizationQuery;
 import org.finos.fluxnova.bpm.test.mockito.QueryMocks;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;

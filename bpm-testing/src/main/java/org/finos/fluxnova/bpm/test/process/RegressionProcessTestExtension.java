@@ -4,33 +4,31 @@ import org.finos.fluxnova.bpm.test.TestException;
 import org.finos.fluxnova.bpm.test.coverage.ProcessCoverage;
 import org.finos.fluxnova.bpm.test.rules.MockConnectorRule;
 import org.finos.fluxnova.bpm.test.scripting.ScriptTestUtils;
-import com.github.tomakehurst.wiremock.junit.WireMockRule;
+import org.finos.fluxnova.bpm.engine.ProcessEngine;
+import org.finos.fluxnova.bpm.engine.ProcessEngines;
+import org.finos.fluxnova.bpm.engine.RepositoryService;
 import org.finos.fluxnova.bpm.engine.repository.Deployment;
 import org.finos.fluxnova.bpm.engine.repository.DeploymentBuilder;
-import org.finos.fluxnova.bpm.engine.test.ProcessEngineRule;
 import org.finos.fluxnova.bpm.engine.test.mock.Mocks;
 import org.finos.fluxnova.bpm.model.bpmn.BpmnModelInstance;
-import org.junit.ClassRule;
-import org.junit.Rule;
+import org.junit.jupiter.api.TestInstance;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import java.io.IOException;
+import java.util.Objects;
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+public class RegressionProcessTestExtension {
 
-import static org.finos.fluxnova.bpm.engine.test.assertions.ProcessEngineTests.repositoryService;
+    public static final FluxnovaFacade fluxnova = new FluxnovaFacade();
 
-public class ProcessTestExtension {
-
-    @Rule
-    public final ProcessEngineRule fluxnova = new ProcessEngineRule();
-
-    @ClassRule
-    public static final WireMockRule wireMockRule = new MockConnectorRule(8080);
+    public static final MockConnectorRule wireMockRule = new MockConnectorRule(8080);
 
     public static void setup(String bpmn, String... dependencies) {
         Class<?> caller = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE).getCallerClass();
         try {
-            DeploymentBuilder deploymentBuilder = repositoryService().createDeployment();
+            RepositoryService repositoryService = getRepositoryService();
+            DeploymentBuilder deploymentBuilder = repositoryService.createDeployment();
             deployModel(bpmn, deploymentBuilder, caller);
             for (String dependency : dependencies) {
                 deploy(dependency, deploymentBuilder);
@@ -43,11 +41,29 @@ public class ProcessTestExtension {
     }
 
     public static void teardown() {
-        wireMockRule.stop();
-        Mocks.reset();
-        for (Deployment deployment : repositoryService().createDeploymentQuery().list()) {
-            repositoryService().deleteDeployment(deployment.getId(), true);
+        try {
+            wireMockRule.stop();
+            Mocks.reset();
+            RepositoryService repositoryService = getRepositoryService();
+            for (Deployment deployment : repositoryService.createDeploymentQuery().list()) {
+                repositoryService.deleteDeployment(deployment.getId(), true);
+            }
+            ProcessEngine processEngine = SpringContextHolder.getProcessEngine();
+            if (processEngine != null) {
+                ProcessEngines.unregister(processEngine);
+            }
+        } catch (Exception e) {
+            throw new TestException("Error tearing down resource", e);
         }
+    }
+
+    private static RepositoryService getRepositoryService() {
+        ProcessEngine processEngine = SpringContextHolder.getProcessEngine();
+        if (processEngine != null) {
+            ProcessEngines.registerProcessEngine(processEngine);
+            return processEngine.getRepositoryService();
+        }
+        return org.finos.fluxnova.bpm.engine.test.assertions.bpmn.BpmnAwareTests.repositoryService();
     }
 
     private static void deployModel(String fileName, DeploymentBuilder deployment, Class<?> caller) throws IOException {
@@ -62,5 +78,13 @@ public class ProcessTestExtension {
         Resource resource = resolver.getResource("classpath:" + fileName);
         deployment.addInputStream(resource.getFilename(), resource.getInputStream());
         return resource;
+    }
+
+    public static class FluxnovaFacade {
+        @SuppressWarnings("unused")
+        public void manageDeployment(Deployment deployment) {
+            Objects.requireNonNull(deployment.getId());
+            // Deployment lifecycle is handled centrally in teardown(); this preserves the test API.
+        }
     }
 }

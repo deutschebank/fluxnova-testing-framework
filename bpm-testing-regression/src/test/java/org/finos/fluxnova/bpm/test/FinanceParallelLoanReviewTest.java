@@ -1,28 +1,25 @@
 package org.finos.fluxnova.bpm.test;
 
 import org.finos.fluxnova.bpm.test.helpers.FlowHelpers;
-import org.finos.fluxnova.bpm.test.process.ProcessTestExtension;
 import org.finos.fluxnova.bpm.engine.runtime.ProcessInstance;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.stream.Stream;
 
 import static org.finos.fluxnova.bpm.engine.test.assertions.bpmn.BpmnAwareTests.assertThat;
 import static org.finos.fluxnova.bpm.engine.test.assertions.bpmn.BpmnAwareTests.runtimeService;
 
-@SpringBootTest
 class FinanceParallelLoanReviewTest extends ProcessTestExtension {
 
-    @BeforeAll static void beforeAll() {
+    @BeforeAll void beforeAll() {
         setup("FinanceParallelLoanReview.bpmn");
     }
 
-    @AfterAll static void afterAll() {
+    @AfterAll void afterAll() {
         teardown();
     }
 

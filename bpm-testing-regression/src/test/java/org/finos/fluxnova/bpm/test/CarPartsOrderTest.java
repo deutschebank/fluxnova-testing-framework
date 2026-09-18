@@ -2,7 +2,6 @@ package org.finos.fluxnova.bpm.test;
 
 import org.finos.fluxnova.bpm.test.helpers.DelegateHelpers;
 import org.finos.fluxnova.bpm.test.mockito.FluxnovaMockito;
-import org.finos.fluxnova.bpm.test.process.ProcessTestExtension;
 import org.finos.fluxnova.bpm.engine.delegate.BpmnError;
 import org.finos.fluxnova.bpm.engine.repository.Deployment;
 import org.finos.fluxnova.bpm.engine.runtime.ProcessInstance;
@@ -10,24 +9,22 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.finos.fluxnova.bpm.engine.test.assertions.bpmn.BpmnAwareTests.*;
 
-@SpringBootTest
 class CarPartsOrderTest extends ProcessTestExtension {
 
     @Autowired
     DelegateMocks delegateMocks;
 
     @BeforeAll
-    static void beforeAll() {
+    void beforeAll() {
         setup("CarParts_Order.bpmn");
     }
 
     @AfterAll
-    static void after() {
+    void after() {
         teardown();
     }
 

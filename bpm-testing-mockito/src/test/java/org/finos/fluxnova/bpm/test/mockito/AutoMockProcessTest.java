@@ -3,11 +3,11 @@ package org.finos.fluxnova.bpm.test.mockito;
 import org.finos.fluxnova.bpm.engine.TaskService;
 import org.finos.fluxnova.bpm.engine.runtime.ProcessInstance;
 import org.finos.fluxnova.bpm.engine.test.Deployment;
-import org.finos.fluxnova.bpm.engine.test.ProcessEngineRule;
+import org.finos.fluxnova.bpm.engine.test.junit5.ProcessEngineExtension;
 import org.finos.fluxnova.bpm.engine.test.mock.Mocks;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.finos.fluxnova.bpm.test.mockito.DelegateExpressions.*;
@@ -22,12 +22,14 @@ import static org.finos.fluxnova.bpm.test.mockito.MostUsefulProcessEngineConfigu
  */
 public class AutoMockProcessTest {
 
-  @Rule
-  public final ProcessEngineRule processEngineRule = new ProcessEngineRule(mostUsefulProcessEngineConfiguration().buildProcessEngine());
+  @RegisterExtension
+  static final ProcessEngineExtension processEngineRule = ProcessEngineExtension.builder()
+    .useProcessEngine(mostUsefulProcessEngineConfiguration().buildProcessEngine())
+    .build();
 
   private TaskService taskService;
 
-  @Before
+  @BeforeEach
   public void setUp() {
     taskService = processEngineRule.getTaskService();
   }

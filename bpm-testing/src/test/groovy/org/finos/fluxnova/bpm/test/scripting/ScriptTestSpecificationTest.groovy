@@ -1,6 +1,6 @@
 package org.finos.fluxnova.bpm.test.scripting
 
-import com.fasterxml.jackson.databind.ObjectMapper
+import tools.jackson.databind.ObjectMapper
 import org.finos.fluxnova.bpm.test.coverage.CoverageProperties
 import com.oracle.truffle.js.scriptengine.GraalJSEngineFactory
 import org.finos.fluxnova.bpm.engine.delegate.BpmnError

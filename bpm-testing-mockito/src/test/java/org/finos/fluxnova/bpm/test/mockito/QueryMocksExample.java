@@ -3,14 +3,14 @@ package org.finos.fluxnova.bpm.test.mockito;
 import org.finos.fluxnova.bpm.engine.TaskService;
 import org.finos.fluxnova.bpm.engine.task.Task;
 import org.finos.fluxnova.bpm.engine.task.TaskQuery;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-@Ignore
+@Disabled
 public class QueryMocksExample {
 
   private final TaskService taskService = mock(TaskService.class);

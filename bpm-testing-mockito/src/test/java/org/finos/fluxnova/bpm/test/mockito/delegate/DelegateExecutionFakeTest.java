@@ -4,7 +4,7 @@ import org.finos.fluxnova.bpm.test.data.factory.VariableFactory;
 import org.finos.fluxnova.bpm.test.mockito.FluxnovaMockito;
 import org.finos.fluxnova.bpm.engine.runtime.Incident;
 import org.finos.fluxnova.bpm.engine.variable.Variables;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.finos.fluxnova.bpm.test.data.FluxnovaBpmData.stringVariable;
 import static org.assertj.core.api.Assertions.assertThat;

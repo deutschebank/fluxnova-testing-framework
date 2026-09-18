@@ -231,18 +231,23 @@ public class DelegateCaseVariableInstanceFake implements DelegateCaseVariableIns
     return this;
   }
 
-  @Override
-  public String getTenantId() {
-    return tenantId;
-  }
+   @Override
+   public String getTenantId() {
+     return tenantId;
+   }
 
-  public DelegateCaseVariableInstanceFake withTenantId(String tenantId) {
-    this.tenantId = tenantId;
-    return this;
-  }
+   public DelegateCaseVariableInstanceFake withTenantId(String tenantId) {
+     this.tenantId = tenantId;
+     return this;
+   }
 
-  @Override
-  public String toString() {
+   @Override
+   public boolean isRestricted() {
+     return false;
+   }
+
+   @Override
+   public String toString() {
     return "DelegateCaseVariableInstanceFake{" +
       "id='" + id + '\'' +
       ", name='" + name + '\'' +

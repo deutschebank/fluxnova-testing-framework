@@ -5,7 +5,7 @@ import org.finos.fluxnova.bpm.test.data.factory.VariableFactory;
 import org.finos.fluxnova.bpm.engine.delegate.BpmnError;
 import org.finos.fluxnova.bpm.test.mockito.DelegateExpressions;
 import org.finos.fluxnova.bpm.test.mockito.delegate.DelegateExecutionFake;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 

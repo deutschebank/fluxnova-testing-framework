@@ -6,7 +6,7 @@ import org.finos.fluxnova.bpm.engine.delegate.DelegateCaseExecution;
 import org.finos.fluxnova.bpm.engine.delegate.DelegateExecution;
 import org.finos.fluxnova.bpm.engine.delegate.DelegateTask;
 import org.finos.fluxnova.bpm.engine.delegate.TaskListener;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.finos.fluxnova.bpm.engine.delegate.TaskListener.EVENTNAME_CREATE;

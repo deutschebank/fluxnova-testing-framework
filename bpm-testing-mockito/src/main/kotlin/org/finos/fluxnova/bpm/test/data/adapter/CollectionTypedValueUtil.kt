@@ -1,9 +1,9 @@
 package org.finos.fluxnova.bpm.test.data.adapter
 
-import com.fasterxml.jackson.core.JsonProcessingException
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.databind.type.CollectionType
-import com.fasterxml.jackson.databind.type.MapType
+import tools.jackson.core.JacksonException
+import tools.jackson.databind.ObjectMapper
+import tools.jackson.databind.type.CollectionType
+import tools.jackson.databind.type.MapType
 import org.finos.fluxnova.bpm.engine.variable.impl.value.ObjectValueImpl
 import org.finos.fluxnova.bpm.engine.variable.value.TypedValue
 
@@ -47,7 +47,7 @@ object CollectionTypedValueUtil {
                         throw WrongVariableTypeException("Error reading " + variableName + ": Wrong member type detected, expected " + memberClazz.name + ", but was not found in " + values)
                     }
                 }
-            } catch (jpe: JsonProcessingException) {
+            } catch (jpe: JacksonException) {
                 throw WrongVariableTypeException("Error reading $variableName: Couldn't read value from $json")
             }
         } else {
@@ -92,7 +92,7 @@ object CollectionTypedValueUtil {
                         )
                     }
                 }
-            } catch (jpe: JsonProcessingException) {
+            } catch (jpe: JacksonException) {
                 throw WrongVariableTypeException("Error reading $variableName: Couldn't read value from $json")
             }
         } else {

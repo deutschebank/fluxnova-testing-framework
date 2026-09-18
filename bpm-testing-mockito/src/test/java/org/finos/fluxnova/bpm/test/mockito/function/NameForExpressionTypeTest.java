@@ -2,7 +2,7 @@ package org.finos.fluxnova.bpm.test.mockito.function;
 
 
 import jakarta.inject.Named;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 

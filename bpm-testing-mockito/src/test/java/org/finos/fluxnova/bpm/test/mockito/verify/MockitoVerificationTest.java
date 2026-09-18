@@ -3,12 +3,13 @@ package org.finos.fluxnova.bpm.test.mockito.verify;
 import org.finos.fluxnova.bpm.engine.delegate.DelegateExecution;
 import org.finos.fluxnova.bpm.test.mockito.DelegateExpressions;
 import org.finos.fluxnova.bpm.test.mockito.mock.FluentJavaDelegateMock;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Mockito.times;
-import static org.mockito.MockitoAnnotations.initMocks;
 
 public class MockitoVerificationTest {
 
@@ -19,9 +20,16 @@ public class MockitoVerificationTest {
   @Mock
   private DelegateExecution delegateExecution;
 
-  @Before
-  public void setUp() throws Exception {
-    initMocks(this);
+  private AutoCloseable mocks;
+
+  @BeforeEach
+  public void setUp() {
+    mocks = MockitoAnnotations.openMocks(this);
+  }
+
+  @AfterEach
+  public void tearDown() throws Exception {
+    mocks.close();
   }
 
   @Test

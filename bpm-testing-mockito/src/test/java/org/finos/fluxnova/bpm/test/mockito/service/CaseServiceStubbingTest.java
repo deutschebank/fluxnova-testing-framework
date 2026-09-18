@@ -3,7 +3,7 @@ package org.finos.fluxnova.bpm.test.mockito.service;
 import org.finos.fluxnova.bpm.test.data.factory.VariableFactory;
 import org.finos.fluxnova.bpm.engine.CaseService;
 import org.finos.fluxnova.bpm.test.mockito.ServiceExpressions;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 

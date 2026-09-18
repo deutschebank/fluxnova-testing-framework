@@ -4,7 +4,7 @@ import org.finos.fluxnova.bpm.test.data.FluxnovaBpmData;
 import org.finos.fluxnova.bpm.test.data.factory.VariableFactory;
 import org.finos.fluxnova.bpm.test.data.reader.VariableReader;
 import org.finos.fluxnova.bpm.engine.variable.Variables;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

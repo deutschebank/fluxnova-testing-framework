@@ -5,12 +5,12 @@
   <parent>
     <groupId>org.finos.fluxnova.bpm</groupId>
     <artifactId>fluxnova-parent</artifactId>
-    <version>2.0.1</version>
+    <version>3.0.1</version>
     <relativePath/>
   </parent>
   <groupId>org.finos.fluxnova.bpm.test</groupId>
   <artifactId>fluxnova-bpm-testing-parent</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>1.1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Fluxnova BPM Testing Parent</name>
   <description>Fluxnova BPM Testing Parent</description>
@@ -37,7 +37,6 @@
     <maven.compiler.release>${java.version}</maven.compiler.release>
     <version.gmavenplus-plugin>3.0.2</version.gmavenplus-plugin>
     <version.assertj>3.27.6</version.assertj>
-    <version.junit-platform-launcher>1.11.3</version.junit-platform-launcher>
     <version.jakarta.inject>2.0.1</version.jakarta.inject>
     <version.kotlin-jvm-logging>7.0.14</version.kotlin-jvm-logging>
     <version.gson>2.13.2</version.gson>
@@ -48,7 +47,7 @@
     <version.wiremock>3.3.1</version.wiremock>
     <skipTests>false</skipTests>
     <version.jakarta.el-api>6.0.1</version.jakarta.el-api>
-    <version.spock-core>2.4-M6-groovy-4.0</version.spock-core>
+    <version.spock-core>2.4-groovy-5.0</version.spock-core>
     <version.commons-langs>3.19.0</version.commons-langs>
     <version.logback>1.5.18</version.logback>
     <java.version>21</java.version>
@@ -56,19 +55,20 @@
     <version.h2>2.3.232</version.h2>
     <version.jakarta.validation-api>3.1.1</version.jakarta.validation-api>
     <version.kotlin-stdlib>2.2.21</version.kotlin-stdlib>
-    <version.maven-surefire-plugin>3.5.4</version.maven-surefire-plugin>
+    <version.maven-surefire-plugin>3.6.0</version.maven-surefire-plugin>
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <version.jakarta.annotation-api>3.0.0</version.jakarta.annotation-api>
     <version.slf4j>2.0.17</version.slf4j>
-    <version.jacoco-maven-plugin>0.8.9</version.jacoco-maven-plugin>
+    <version.jacoco-maven-plugin>0.8.12</version.jacoco-maven-plugin>
     <version.hibernate-validator>9.1.0.Final</version.hibernate-validator>
     <version.mockito-kotlin>6.1.0</version.mockito-kotlin>
     <skipITs>false</skipITs>
-    <version.junit-jupiter>5.11.3</version.junit-jupiter>
-    <version.fluxnova>2.0.1</version.fluxnova>
+    <version.fluxnova>3.0.1</version.fluxnova>
     <version.jakarta.el>4.0.2</version.jakarta.el>
     <version.sonar.plugin>5.5.0.6356</version.sonar.plugin>
     <version.publishing.plugin>0.9.0</version.publishing.plugin>
+    <version.jackson.annotations>2.17.2</version.jackson.annotations>
+    <version.graal.js>23.0.12</version.graal.js>
     <release.goals>install org.sonatype.central:central-publishing-maven-plugin:0.9.0:publish</release.goals>
   </properties>
 
@@ -121,6 +121,14 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-gpg-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${version.maven-surefire-plugin}</version>
+        <configuration>
+          <runOrder>filesystem</runOrder>
+        </configuration>
       </plugin>
     </plugins>
   </build>

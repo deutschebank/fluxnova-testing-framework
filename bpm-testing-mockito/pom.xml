@@ -4,11 +4,11 @@
     <parent>
         <groupId>org.finos.fluxnova.bpm.test</groupId>
         <artifactId>fluxnova-bpm-testing-parent</artifactId>
-        <version>1.0.1-SNAPSHOT</version>
+        <version>1.1.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>fluxnova-bpm-testing-mockito</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.1.0-SNAPSHOT</version>
 
     <packaging>jar</packaging>
 
@@ -46,6 +46,18 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>tools.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${version.jackson}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>tools.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${version.jackson}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
             <groupId>org.finos.fluxnova.bpm</groupId>
             <artifactId>fluxnova-bpm-assert</artifactId>
             <scope>test</scope>
@@ -66,18 +78,8 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.vintage</groupId>
-            <artifactId>junit-vintage-engine</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -205,6 +207,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${version.maven-surefire-plugin}</version>
                 <configuration>
+                    <runOrder>filesystem</runOrder>
                     <includes>
                         <include>**/*Test*</include>
                         <include>**/mockito/**/*</include>
