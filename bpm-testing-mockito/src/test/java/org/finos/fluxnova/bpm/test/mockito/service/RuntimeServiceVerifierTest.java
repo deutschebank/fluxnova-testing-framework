@@ -4,8 +4,8 @@ import org.finos.fluxnova.bpm.test.data.factory.VariableFactory;
 import org.finos.fluxnova.bpm.engine.RuntimeService;
 import org.finos.fluxnova.bpm.test.mockito.ServiceExpressions;
 import org.finos.fluxnova.bpm.test.mockito.verify.RuntimeServiceVerification;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
@@ -18,7 +18,7 @@ public class RuntimeServiceVerifierTest {
 
   private final RuntimeService runtimeService = mock(RuntimeService.class);
 
-  @Before
+  @BeforeEach
   public void resetMocks() {
     reset(runtimeService);
   }

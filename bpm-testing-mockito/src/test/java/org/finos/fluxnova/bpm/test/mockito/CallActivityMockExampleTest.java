@@ -7,13 +7,13 @@ import org.finos.fluxnova.bpm.engine.runtime.EventSubscription;
 import org.finos.fluxnova.bpm.engine.runtime.Job;
 import org.finos.fluxnova.bpm.engine.runtime.JobQuery;
 import org.finos.fluxnova.bpm.engine.runtime.ProcessInstance;
-import org.finos.fluxnova.bpm.engine.test.ProcessEngineRule;
+import org.finos.fluxnova.bpm.engine.test.junit5.ProcessEngineExtension;
 import org.finos.fluxnova.bpm.model.bpmn.Bpmn;
 import org.finos.fluxnova.bpm.model.bpmn.BpmnModelInstance;
 import org.finos.fluxnova.bpm.test.mockito.function.DeployProcess;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 
 import java.time.Instant;
 import java.util.Date;
@@ -25,7 +25,8 @@ import static org.finos.fluxnova.bpm.engine.variable.Variables.createVariables;
 import static org.finos.fluxnova.bpm.model.xml.test.assertions.ModelAssertions.assertThat;
 import static org.finos.fluxnova.bpm.test.mockito.MostUsefulProcessEngineConfiguration.mostUsefulProcessEngineConfiguration;
 import static org.finos.fluxnova.bpm.test.mockito.ProcessExpressions.registerCallActivityMock;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CallActivityMockExampleTest {
 
@@ -36,10 +37,12 @@ public class CallActivityMockExampleTest {
   private static final String SIGNAL_ALLDOIT = "ALLDOIT";
   private static final String TASK_USERTASK = "user_task";
 
-  @Rule
-  public final ProcessEngineRule fluxnova = new ProcessEngineRule(mostUsefulProcessEngineConfiguration().buildProcessEngine());
+  @RegisterExtension
+  static final ProcessEngineExtension fluxnova = ProcessEngineExtension.builder()
+    .useProcessEngine(mostUsefulProcessEngineConfiguration().buildProcessEngine())
+    .build();
 
-  @Before
+  @BeforeEach
   public void setUp() {
     prepareProcessWithOneSubprocess();
   }
@@ -158,13 +161,13 @@ public class CallActivityMockExampleTest {
     assertThatTimerIsWaitingUntil(Date.from(Instant.now().plusSeconds(60)));
   }
 
-  @Test(expected = RuntimeException.class)
+  @Test
   public void register_subprocess_mock_withException() {
     fluxnova.manageDeployment(registerCallActivityMock(SUB_PROCESS_ID)
       .onExecutionRunIntoError(new Exception("No"))
       .deploy(fluxnova));
 
-    startProcess(PROCESS_ID);
+    assertThrows(RuntimeException.class, () -> startProcess(PROCESS_ID));
   }
 
   @Test

@@ -2,7 +2,7 @@ package org.finos.fluxnova.bpm.test.mockito;
 
 import org.finos.fluxnova.bpm.engine.RuntimeService;
 import org.finos.fluxnova.bpm.engine.runtime.MessageCorrelationBuilder;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.*;
 

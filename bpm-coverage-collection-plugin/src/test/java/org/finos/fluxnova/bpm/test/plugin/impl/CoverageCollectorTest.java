@@ -1,6 +1,6 @@
 package org.finos.fluxnova.bpm.test.plugin.impl;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectMapper;
 import org.finos.fluxnova.bpm.test.coverage.CoverageProperties;
 import org.finos.fluxnova.bpm.test.domain.coverage.ProcessTestMetadata;
 import org.finos.fluxnova.bpm.test.plugin.domain.ModelTestMetadata;

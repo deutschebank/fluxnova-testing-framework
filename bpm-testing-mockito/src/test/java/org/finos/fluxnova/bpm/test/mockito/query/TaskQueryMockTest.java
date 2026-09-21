@@ -4,11 +4,12 @@ import org.finos.fluxnova.bpm.engine.TaskService;
 import org.finos.fluxnova.bpm.engine.task.Task;
 import org.finos.fluxnova.bpm.engine.task.TaskQuery;
 import org.finos.fluxnova.bpm.test.mockito.FluxnovaMockito;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.MockitoAnnotations;
 
 import java.util.Date;
 
@@ -17,14 +18,25 @@ import static org.mockito.Mockito.verify;
 
 //import org.finos.fluxnova.bpm.test.mockito.QueryMocks1;
 
-@RunWith(MockitoJUnitRunner.class)
 public class TaskQueryMockTest {
+
+  private AutoCloseable mocks;
 
   @Mock
   private TaskService taskService;
 
   @Mock
   private Task singleResult;
+
+  @BeforeEach
+  void setUp() {
+    mocks = MockitoAnnotations.openMocks(this);
+  }
+
+  @AfterEach
+  void tearDown() throws Exception {
+    mocks.close();
+  }
 
   @Test
   public void should_mock_query_and_return_singleResult() {
@@ -70,8 +82,8 @@ public class TaskQueryMockTest {
   }
 
   @Test
-  public void count_on_taskQuery() throws Exception {
-    final TaskQuery taskQuery = new TaskQueryMock().forService(taskService).count(5);
+  public void count_on_taskQuery() {
+    new TaskQueryMock().forService(taskService).count(5);
 
     assertThat(taskService.createTaskQuery().active().processDefinitionKey("foo").count()).isEqualTo(5);
   }

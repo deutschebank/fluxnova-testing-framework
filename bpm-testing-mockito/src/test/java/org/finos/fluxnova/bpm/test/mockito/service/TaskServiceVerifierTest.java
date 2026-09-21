@@ -6,8 +6,8 @@ import org.finos.fluxnova.bpm.engine.TaskService;
 import org.finos.fluxnova.bpm.engine.variable.VariableMap;
 import org.finos.fluxnova.bpm.test.mockito.ServiceExpressions;
 import org.finos.fluxnova.bpm.test.mockito.verify.TaskServiceVerification;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
@@ -20,7 +20,7 @@ public class TaskServiceVerifierTest {
 
   private final TaskService taskService = mock(TaskService.class);
 
-  @Before
+  @BeforeEach
   public void resetMocks() {
     reset(taskService);
   }

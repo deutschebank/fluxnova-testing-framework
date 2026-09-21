@@ -1,7 +1,7 @@
 package org.finos.fluxnova.bpm.test.mockito.function;
 
 import org.apache.commons.lang3.tuple.Pair;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.net.URL;
 import java.util.List;

@@ -1,32 +1,36 @@
 package org.finos.fluxnova.bpm.test.mockito.answer;
 
 import org.finos.fluxnova.bpm.engine.query.Query;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.exceptions.misusing.WrongTypeOfReturnValue;
 import org.mockito.invocation.InvocationOnMock;
+import org.mockito.MockitoAnnotations;
 
 import java.util.List;
 import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.when;
-import static org.mockito.MockitoAnnotations.initMocks;
 
 public class FluentAnswerTest {
 
   @Mock
   private InvocationOnMock invocationOnMock;
 
-  @Rule
-  public ExpectedException expected = ExpectedException.none();
+  private AutoCloseable mocks;
 
-  @Before
-  public void setUp() throws Exception {
-    initMocks(this);
+  @BeforeEach
+  void setUp() {
+    mocks = MockitoAnnotations.openMocks(this);
+  }
+
+  @AfterEach
+  void tearDown() throws Exception {
+    mocks.close();
   }
 
   @Test
@@ -60,11 +64,10 @@ public class FluentAnswerTest {
 
   @Test
   public void shouldThrowClassCastExceptionUsingSubtypes() {
-
-    expected.expect(WrongTypeOfReturnValue.class);
-
     FluentBuilder mock = FluentAnswer.createMock(FluentBuilder.class);
-    when(mock.subType()).thenReturn(new FluentBuilderExtension());
+
+    assertThatThrownBy(() -> when(mock.subType()).thenReturn(new FluentBuilderExtension()))
+      .isInstanceOf(WrongTypeOfReturnValue.class);
   }
 
   interface SomeAspect {

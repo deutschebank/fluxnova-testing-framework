@@ -3,7 +3,7 @@ package org.finos.fluxnova.bpm.test.rules;
 import com.github.tomakehurst.wiremock.http.HttpHeader;
 import com.github.tomakehurst.wiremock.http.HttpHeaders;
 import com.github.tomakehurst.wiremock.http.Response;
-import com.github.tomakehurst.wiremock.junit.WireMockRule;
+import com.github.tomakehurst.wiremock.WireMockServer;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,8 +11,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class MockConnectorRuleTest {
 
     @Test
-    void returnsWireMockRule_onMockConnectorInitialization() {
-        WireMockRule wireMockRule = new MockConnectorRule(8080);
+    void returnsWireMockServer_onMockConnectorInitialization() {
+        WireMockServer wireMockRule = new MockConnectorRule(8080);
         assertNotNull(wireMockRule);
     }
 

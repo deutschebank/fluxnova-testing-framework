@@ -1,6 +1,6 @@
 package org.finos.fluxnova.bpm.test.plugin.impl.scripts;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectMapper;
 import org.finos.fluxnova.bpm.test.plugin.domain.script.ScriptRunInstance;
 
 import java.io.File;

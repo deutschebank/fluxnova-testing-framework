@@ -1,6 +1,6 @@
 package org.finos.fluxnova.bpm.test.plugin.impl.scripts;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectMapper;
 import org.finos.fluxnova.bpm.test.plugin.domain.script.ScriptRunInstance;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;

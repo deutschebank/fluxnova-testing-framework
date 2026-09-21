@@ -3,7 +3,7 @@ package org.finos.fluxnova.bpm.test.mockito.delegate;
 import org.finos.fluxnova.bpm.engine.ProcessEngineServices;
 import org.finos.fluxnova.bpm.engine.impl.cmmn.execution.CaseExecutionState;
 import org.finos.fluxnova.bpm.test.mockito.FluxnovaMockito;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;

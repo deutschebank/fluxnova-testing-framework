@@ -5,10 +5,10 @@ import com.github.tomakehurst.wiremock.extension.ResponseTransformerV2;
 import com.github.tomakehurst.wiremock.http.HttpHeader;
 import com.github.tomakehurst.wiremock.http.HttpHeaders;
 import com.github.tomakehurst.wiremock.http.Response;
-import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import com.github.tomakehurst.wiremock.stubbing.ServeEvent;
+import com.github.tomakehurst.wiremock.WireMockServer;
 
-public class MockConnectorRule extends WireMockRule {
+public class MockConnectorRule extends WireMockServer {
 
     public MockConnectorRule(int port) {
         super(WireMockConfiguration.wireMockConfig().port(port).extensions(new ConnectorResponseTransformer()));

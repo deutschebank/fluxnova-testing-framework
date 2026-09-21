@@ -4,8 +4,8 @@ import org.finos.fluxnova.bpm.test.data.factory.VariableFactory;
 import org.finos.fluxnova.bpm.engine.CaseService;
 import org.finos.fluxnova.bpm.test.mockito.ServiceExpressions;
 import org.finos.fluxnova.bpm.test.mockito.verify.CaseServiceVerification;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
@@ -18,7 +18,7 @@ public class CaseServiceVerifierTest {
 
   private final CaseService caseService = mock(CaseService.class);
 
-  @Before
+  @BeforeEach
   public void resetMocks() {
     reset(caseService);
   }

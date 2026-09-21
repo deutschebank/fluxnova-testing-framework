@@ -13,7 +13,12 @@ import java.util.Map;
 public abstract class VariableScopeFake<T extends VariableScopeFake> extends AbstractVariableScope implements VariableScope {
 
   protected VariableStore<CoreVariableInstance> variableStore = new VariableStore<>();
-  protected VariableInstanceFactory<CoreVariableInstance> variableInstanceFactory = (name, value, isTransient) -> new SimpleVariableInstance(name, value);
+  protected VariableInstanceFactory<CoreVariableInstance> variableInstanceFactory = new VariableInstanceFactory<CoreVariableInstance>() {
+    @Override
+    public CoreVariableInstance build(String name, org.finos.fluxnova.bpm.engine.variable.value.TypedValue typedValue, boolean isTransient, boolean isRestricted) {
+      return new SimpleVariableInstance(name, typedValue);
+    }
+  };
 
   @Override
   protected VariableStore<CoreVariableInstance> getVariableStore() {
